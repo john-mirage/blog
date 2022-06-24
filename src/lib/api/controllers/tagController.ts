@@ -1,5 +1,5 @@
 import { getTagFromMarkdownFile, getTagDirectory } from '@api/databases/tagDatabase';
-import { Tag } from '@api/models/tag';
+import { Tag } from '@api/interfaces/tag';
 import { getFilenameWithExtension } from '@api/helpers/fileHelper';
 import { sortTagsByTitle } from '@api/helpers/tagHelper';
 import { getMarkdownFilenames } from '@api/databases/markdownDatabase';

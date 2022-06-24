@@ -1,5 +1,5 @@
-import { Episode } from '@api/models/episode';
-import { Frontmatter } from '@api/models/markdownFile';
+import { Episode } from '@api/interfaces/episode';
+import { Frontmatter } from '@api/interfaces/markdownFile';
 
 export interface EpisodeFrontmatter {
   date: string;

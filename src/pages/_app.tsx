@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import { ThemeProvider, DefaultTheme } from "styled-components";
 import GlobalStyle from "@components/global-styles";
+import "highlight.js/styles/atom-one-dark.css"
 
 const theme: DefaultTheme = {
   colors: {

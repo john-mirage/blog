@@ -13,7 +13,11 @@ interface PostDTO {
   tags: string[];
 }
 
-function IndexPage({ posts }) {
+interface Props {
+  posts: PostDTO[];
+}
+
+function IndexPage({ posts }: Props) {
   return (
     <>
       <Head>
@@ -22,7 +26,7 @@ function IndexPage({ posts }) {
       <ul>
         {posts.map((post) => (
           <li key={post.title}>
-            <Link href={`posts/${post.slug}`}>
+            <Link href={`/posts/${post.slug}`}>
               <a>{post.title}</a>
             </Link>
           </li>

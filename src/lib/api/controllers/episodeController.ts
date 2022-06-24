@@ -1,5 +1,5 @@
 import { getEpisodeFromMarkdownFile, getEpisodeDirectory } from '@api/databases/episodeDatabase';
-import { Episode } from '@api/models/episode';
+import { Episode } from '@api/interfaces/episode';
 import { getFilenameWithExtension } from '@api/helpers/fileHelper';
 import { sortEpisodesById } from '@api/helpers/episodeHelper';
 import { getMarkdownFilenames } from '@api/databases/markdownDatabase';

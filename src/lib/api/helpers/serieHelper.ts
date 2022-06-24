@@ -1,5 +1,5 @@
-import { Serie } from '@api/models/serie';
-import { Frontmatter } from '@api/models/markdownFile';
+import { Serie } from '@api/interfaces/serie';
+import { Frontmatter } from '@api/interfaces/markdownFile';
 
 export interface SerieFrontmatter {
   excerpt: string;

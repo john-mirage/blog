@@ -1,5 +1,5 @@
 import { getSerieFromMarkdownFile, getSerieDirectory } from '@api/databases/serieDatabase';
-import { Serie } from '@api/models/serie';
+import { Serie } from '@api/interfaces/serie';
 import { getFilenameWithExtension } from '@api/helpers/fileHelper';
 import { sortSeriesByLastUpdate } from '@api/helpers/serieHelper';
 import { getMarkdownFilenames } from '@api/databases/markdownDatabase';

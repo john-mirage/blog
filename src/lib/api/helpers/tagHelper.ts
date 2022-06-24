@@ -1,5 +1,5 @@
-import { Tag } from '@api/models/tag';
-import { Frontmatter } from '@api/models/markdownFile';
+import { Tag } from '@api/interfaces/tag';
+import { Frontmatter } from '@api/interfaces/markdownFile';
 
 export interface TagFrontmatter {
   excerpt: string;

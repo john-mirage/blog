@@ -1,5 +1,5 @@
 import { getPostFromMarkdownFile, getPostDirectory } from '@api/databases/postDatabase';
-import { Post } from '@api/models/post';
+import { Post } from '@api/interfaces/post';
 import { getFilenameWithExtension, removeFilenameExtension } from '@api/helpers/fileHelper';
 import { sortPostsByDate, filterPostsByTags } from '@api/helpers/postHelper';
 import { getMarkdownFilenames } from '@api/databases/markdownDatabase';

@@ -1,5 +1,5 @@
-import { Post } from '@api/models/post';
-import { Frontmatter } from '@api/models/markdownFile';
+import { Post } from '@api/interfaces/post';
+import { Frontmatter } from '@api/interfaces/markdownFile';
 
 export interface PostFrontmatter {
   date: string;
