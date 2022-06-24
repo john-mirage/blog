@@ -3,7 +3,6 @@ import {
   getPostDirectory,
   POST_DIRECTORY,
 } from '@api/databases/postDatabase';
-import { Post } from '@api/models/post';
 import {
   getMarkdownFile,
   getMarkdownDirectory,
@@ -15,10 +14,6 @@ import {
   removeFilenameExtension,
 } from '@api/helpers/fileHelper';
 import { getPostFrontmatter } from '@api/helpers/postHelper';
-
-jest.mock('@api/models/post', () => {
-  return { Post: jest.fn() };
-});
 
 jest.mock('@api/databases/markdownDatabase', () => {
   return { getMarkdownFile: jest.fn(), getMarkdownDirectory: jest.fn() };
@@ -40,24 +35,13 @@ jest.mock('@api/helpers/postHelper', () => {
   return { getPostFrontmatter: jest.fn() };
 });
 
-const PostMock = <jest.Mock<Post>>Post;
-const getMarkdownFileMock = <jest.MockedFunction<typeof getMarkdownFile>>(
-  getMarkdownFile
-);
-const getMarkdownDirectoryMock = <
-  jest.MockedFunction<typeof getMarkdownDirectory>
->getMarkdownDirectory;
+const getMarkdownFileMock = <jest.MockedFunction<typeof getMarkdownFile>>(getMarkdownFile);
+const getMarkdownDirectoryMock = <jest.MockedFunction<typeof getMarkdownDirectory>>getMarkdownDirectory;
 const checkISODateMock = <jest.MockedFunction<typeof checkISODate>>checkISODate;
 const joinMock = <jest.MockedFunction<typeof join>>join;
-const removeFilenameExtensionMock = <
-  jest.MockedFunction<typeof removeFilenameExtension>
->removeFilenameExtension;
-const checkFileDirectoryMock = <jest.MockedFunction<typeof checkFileDirectory>>(
-  checkFileDirectory
-);
-const getPostFrontmatterMock = <jest.MockedFunction<typeof getPostFrontmatter>>(
-  getPostFrontmatter
-);
+const removeFilenameExtensionMock = <jest.MockedFunction<typeof removeFilenameExtension>>removeFilenameExtension;
+const checkFileDirectoryMock = <jest.MockedFunction<typeof checkFileDirectory>>(checkFileDirectory);
+const getPostFrontmatterMock = <jest.MockedFunction<typeof getPostFrontmatter>>(getPostFrontmatter);
 
 const MARKDOWN_FILE = {
   name: 'name-of-the-markdown-file-1.md',
@@ -92,14 +76,12 @@ describe('postDatabase: getPost', () => {
     checkISODateMock.mockClear();
     getPostFrontmatterMock.mockClear();
     removeFilenameExtensionMock.mockClear();
-    PostMock.mockClear();
   });
 
   it('should return a new post', () => {
     getMarkdownFileMock.mockReturnValueOnce(MARKDOWN_FILE);
     getPostFrontmatterMock.mockReturnValueOnce(MARKDOWN_FILE.frontmatter);
     removeFilenameExtensionMock.mockReturnValueOnce(POST_SLUG);
-    PostMock.mockReturnValueOnce(POST);
     const post = getPostFromMarkdownFile(FILENAME, FILE_DIRECTORY);
     expect(post).toEqual(POST);
     expect(getMarkdownFileMock).toHaveBeenCalledTimes(1);
@@ -116,16 +98,6 @@ describe('postDatabase: getPost', () => {
     expect(removeFilenameExtensionMock).toHaveBeenCalledTimes(1);
     expect(removeFilenameExtensionMock).toHaveBeenCalledWith(
       MARKDOWN_FILE.name
-    );
-    expect(PostMock).toHaveBeenCalledTimes(1);
-    expect(PostMock).toHaveBeenCalledWith(
-      POST_SLUG,
-      MARKDOWN_FILE.markdown,
-      MARKDOWN_FILE.frontmatter.title,
-      MARKDOWN_FILE.frontmatter.date,
-      MARKDOWN_FILE.frontmatter.excerpt,
-      MARKDOWN_FILE.frontmatter.tags,
-      MARKDOWN_FILE.frontmatter.readTime
     );
   });
 });

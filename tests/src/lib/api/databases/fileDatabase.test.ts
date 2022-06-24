@@ -1,7 +1,6 @@
 import { getFile, getFilenames } from '@api/databases/fileDatabase';
 import { join } from 'path';
 import fs from 'fs';
-import { RawFile } from '@api/models/rawFile';
 
 jest.mock('path', () => {
   return {
@@ -16,20 +15,9 @@ jest.mock('fs', () => {
   };
 });
 
-jest.mock('@api/models/rawFile', () => {
-  return {
-    RawFile: jest.fn(),
-  };
-});
-
 const joinMock = <jest.MockedFunction<typeof join>>join;
-const readFileSyncMock = <jest.MockedFunction<typeof fs.readFileSync>>(
-  fs.readFileSync
-);
-const readdirSyncMock = <jest.MockedFunction<typeof fs.readdirSync>>(
-  fs.readdirSync
-);
-const RawFileMock = <jest.Mock<RawFile>>RawFile;
+const readFileSyncMock = <jest.MockedFunction<typeof fs.readFileSync>>(fs.readFileSync);
+const readdirSyncMock = <jest.MockedFunction<typeof fs.readdirSync>>(fs.readdirSync);
 
 const FILE_DIRECTORY = '/home/work/project';
 
@@ -37,7 +25,6 @@ describe('fileDatabase: getFile', () => {
   afterEach(() => {
     joinMock.mockClear();
     readFileSyncMock.mockClear();
-    RawFileMock.mockClear();
   });
 
   it('should return a file', () => {
@@ -48,7 +35,6 @@ describe('fileDatabase: getFile', () => {
     const FILE_PATH = `${FILE_DIRECTORY}/${RAW_FILE.name}`;
     joinMock.mockReturnValueOnce(FILE_PATH);
     readFileSyncMock.mockReturnValueOnce(RAW_FILE.content);
-    RawFileMock.mockReturnValueOnce(RAW_FILE);
     expect(getFile(RAW_FILE.name, FILE_DIRECTORY)).toEqual(RAW_FILE);
   });
 });

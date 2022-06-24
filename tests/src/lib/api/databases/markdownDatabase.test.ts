@@ -6,7 +6,6 @@ import {
 } from '@api/databases/markdownDatabase';
 import { getFile, getFilenames } from '@api/databases/fileDatabase';
 import matter, { GrayMatterFile } from 'gray-matter';
-import { MarkdownFile } from '@api/models/markdownFile';
 import { join } from 'path';
 
 jest.mock('@api/databases/fileDatabase', () => {
@@ -17,10 +16,6 @@ jest.mock('gray-matter', () => {
   return jest.fn();
 });
 
-jest.mock('@api/models/markdownFile', () => {
-  return { MarkdownFile: jest.fn() };
-});
-
 jest.mock('path', () => {
   return { join: jest.fn() };
 });
@@ -28,7 +23,6 @@ jest.mock('path', () => {
 const getFileMock = <jest.MockedFunction<typeof getFile>>getFile;
 const getFilenamesMock = <jest.MockedFunction<typeof getFilenames>>getFilenames;
 const matterMock = <jest.MockedFunction<typeof matter>>matter;
-const MarkdownFileMock = <jest.Mock<MarkdownFile>>MarkdownFile;
 const joinMock = <jest.MockedFunction<typeof join>>join;
 
 const RAW_FILE = {
@@ -54,7 +48,6 @@ describe('markdownDatabase: getMarkdownFile', () => {
   afterEach(() => {
     getFileMock.mockClear();
     matterMock.mockClear();
-    MarkdownFileMock.mockClear();
   });
 
   it('should return a new Markdown file', () => {
@@ -63,19 +56,12 @@ describe('markdownDatabase: getMarkdownFile', () => {
       data: MARKDOWN_FILE.frontmatter,
       content: RAW_FILE.content,
     } as any);
-    MarkdownFileMock.mockReturnValueOnce(MARKDOWN_FILE);
     const markdownFile = getMarkdownFile(RAW_FILE.name, FILE_DIRECTORY);
     expect(markdownFile).toEqual(MARKDOWN_FILE);
     expect(getFileMock).toHaveBeenCalledTimes(1);
     expect(getFileMock).toHaveBeenCalledWith(RAW_FILE.name, FILE_DIRECTORY);
     expect(matterMock).toHaveBeenCalledTimes(1);
     expect(matterMock).toHaveBeenCalledWith(RAW_FILE.content);
-    expect(MarkdownFileMock).toHaveBeenCalledTimes(1);
-    expect(MarkdownFileMock).toHaveBeenCalledWith(
-      RAW_FILE.name,
-      MARKDOWN_FILE.frontmatter,
-      RAW_FILE.content
-    );
   });
 });
 

@@ -1,5 +1,5 @@
-import { Post } from '@api/models/post';
-import { MarkdownFile } from '@api/models/markdownFile';
+import { Post } from '@api/interfaces/post';
+import { MarkdownFile } from '@api/interfaces/markdownFile';
 import { getMarkdownFile, getMarkdownDirectory } from '@api/databases/markdownDatabase';
 import { checkISODate } from '@api/helpers/dateHelper';
 import { join } from 'path';
@@ -30,15 +30,15 @@ export function getPostFromMarkdownFile(
   );
   checkISODate(frontmatter.date);
   const postSlug: string = removeFilenameExtension(markdownFile.name);
-  return new Post(
-    postSlug,
-    markdownFile.markdown,
-    frontmatter.title,
-    frontmatter.date,
-    frontmatter.excerpt,
-    frontmatter.tags,
-    frontmatter.readTime
-  );
+  return {
+    slug: postSlug,
+    markdown: markdownFile.markdown,
+    title: frontmatter.title,
+    date: frontmatter.date,
+    excerpt: frontmatter.excerpt,
+    tags: frontmatter.tags,
+    readTime: frontmatter.readTime
+  }
 }
 
 /**

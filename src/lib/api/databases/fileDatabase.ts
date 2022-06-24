@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { join } from 'path';
-import { RawFile } from '@api/models/rawFile';
+import { RawFile } from '@api/interfaces/rawFile';
 
 /**
  * Get a file.
@@ -12,7 +12,10 @@ import { RawFile } from '@api/models/rawFile';
 export function getFile(filename: string, fileDirectory: string): RawFile {
   const path: string = join(fileDirectory, filename);
   const content: string = fs.readFileSync(path, 'utf8');
-  return new RawFile(filename, content);
+  return {
+    name: filename,
+    content: content,
+  }
 }
 
 /**

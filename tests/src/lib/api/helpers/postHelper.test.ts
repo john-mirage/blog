@@ -3,7 +3,7 @@ import {
   filterPostsByTags,
   getPostFrontmatter,
 } from '@api/helpers/postHelper';
-import { Post } from '@api/models/post';
+import { Post } from '@api/interfaces/post';
 
 describe('postHelper: sortPostsByDate', () => {
   const POST1 = { date: '2021-09-15T15:30:00' };

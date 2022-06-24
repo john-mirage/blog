@@ -3,7 +3,6 @@ import {
   getTagDirectory,
   TAG_DIRECTORY,
 } from '@api/databases/tagDatabase';
-import { Tag } from '@api/models/tag';
 import {
   getMarkdownFile,
   getMarkdownDirectory,
@@ -14,10 +13,6 @@ import {
   removeFilenameExtension,
 } from '@api/helpers/fileHelper';
 import { getTagFrontmatter } from '@api/helpers/tagHelper';
-
-jest.mock('@api/models/tag', () => {
-  return { Tag: jest.fn() };
-});
 
 jest.mock('@api/databases/markdownDatabase', () => {
   return { getMarkdownFile: jest.fn(), getMarkdownDirectory: jest.fn() };
@@ -39,23 +34,14 @@ jest.mock('@api/helpers/tagHelper', () => {
   return { getTagFrontmatter: jest.fn() };
 });
 
-const TagMock = <jest.Mock<Tag>>Tag;
 const getMarkdownFileMock = <jest.MockedFunction<typeof getMarkdownFile>>(
   getMarkdownFile
 );
-const getMarkdownDirectoryMock = <
-  jest.MockedFunction<typeof getMarkdownDirectory>
->getMarkdownDirectory;
+const getMarkdownDirectoryMock = <jest.MockedFunction<typeof getMarkdownDirectory>>getMarkdownDirectory;
 const joinMock = <jest.MockedFunction<typeof join>>join;
-const removeFilenameExtensionMock = <
-  jest.MockedFunction<typeof removeFilenameExtension>
->removeFilenameExtension;
-const checkFileDirectoryMock = <jest.MockedFunction<typeof checkFileDirectory>>(
-  checkFileDirectory
-);
-const getTagFrontmatterMock = <jest.MockedFunction<typeof getTagFrontmatter>>(
-  getTagFrontmatter
-);
+const removeFilenameExtensionMock = <jest.MockedFunction<typeof removeFilenameExtension>>removeFilenameExtension;
+const checkFileDirectoryMock = <jest.MockedFunction<typeof checkFileDirectory>>(checkFileDirectory);
+const getTagFrontmatterMock = <jest.MockedFunction<typeof getTagFrontmatter>>(getTagFrontmatter);
 
 const MARKDOWN_FILE = {
   name: 'name-of-the-markdown-file-1.md',
@@ -83,14 +69,12 @@ describe('tagDatabase: getTag', () => {
     getMarkdownFileMock.mockClear();
     getTagFrontmatterMock.mockClear();
     removeFilenameExtensionMock.mockClear();
-    TagMock.mockClear();
   });
 
   it('should return a new tag', () => {
     getMarkdownFileMock.mockReturnValueOnce(MARKDOWN_FILE);
     getTagFrontmatterMock.mockReturnValueOnce(MARKDOWN_FILE.frontmatter);
     removeFilenameExtensionMock.mockReturnValueOnce(TAG_SLUG);
-    TagMock.mockReturnValueOnce(TAG);
     const tag = getTagFromMarkdownFile(FILENAME, FILE_DIRECTORY);
     expect(tag).toEqual(TAG);
     expect(getMarkdownFileMock).toHaveBeenCalledTimes(1);
@@ -103,13 +87,6 @@ describe('tagDatabase: getTag', () => {
     expect(removeFilenameExtensionMock).toHaveBeenCalledTimes(1);
     expect(removeFilenameExtensionMock).toHaveBeenCalledWith(
       MARKDOWN_FILE.name
-    );
-    expect(TagMock).toHaveBeenCalledTimes(1);
-    expect(TagMock).toHaveBeenCalledWith(
-      TAG_SLUG,
-      MARKDOWN_FILE.markdown,
-      MARKDOWN_FILE.frontmatter.title,
-      MARKDOWN_FILE.frontmatter.excerpt
     );
   });
 });

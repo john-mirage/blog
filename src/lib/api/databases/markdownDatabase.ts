@@ -1,7 +1,7 @@
 import matter, { GrayMatterFile } from 'gray-matter';
-import { MarkdownFile } from '@api/models/markdownFile';
+import { MarkdownFile } from '@api/interfaces/markdownFile';
 import { getFile, getFilenames } from '@api/databases/fileDatabase';
-import { RawFile } from '@api/models/rawFile';
+import { RawFile } from '@api/interfaces/rawFile';
 import { join } from 'path';
 
 /** @constant The markdown directory */
@@ -23,7 +23,11 @@ export function getMarkdownFile(
 ): MarkdownFile {
   const rawFile: RawFile = getFile(filename, fileDirectory);
   const { data, content }: GrayMatterFile<string> = matter(rawFile.content);
-  return new MarkdownFile(filename, data, content);
+  return {
+    name: filename,
+    frontmatter: data,
+    markdown: content,
+  }
 }
 
 /**

@@ -2,7 +2,7 @@ import {
   sortEpisodesById,
   getEpisodeFrontmatter,
 } from '@api/helpers/episodeHelper';
-import { Episode } from '@api/models/episode';
+import { Episode } from '@api/interfaces/episode';
 
 const EPISODE1 = { id: 2 };
 const EPISODE2 = { id: 1 };

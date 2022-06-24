@@ -1,5 +1,5 @@
-import { Tag } from '@api/models/tag';
-import { MarkdownFile } from '@api/models/markdownFile';
+import { Tag } from '@api/interfaces/tag';
+import { MarkdownFile } from '@api/interfaces/markdownFile';
 import { getMarkdownFile, getMarkdownDirectory } from '@api/databases/markdownDatabase';
 import { join } from 'path';
 import { checkFileDirectory, removeFilenameExtension } from '@api/helpers/fileHelper';
@@ -25,12 +25,12 @@ export function getTagFromMarkdownFile(
     markdownFile.frontmatter
   );
   const tagSlug: string = removeFilenameExtension(markdownFile.name);
-  return new Tag(
-    tagSlug,
-    markdownFile.markdown,
-    frontmatter.title,
-    frontmatter.excerpt
-  );
+  return {
+    slug: tagSlug,
+    markdown: markdownFile.markdown,
+    title: frontmatter.title,
+    excerpt: frontmatter.excerpt,
+  }
 }
 
 /**

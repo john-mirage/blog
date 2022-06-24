@@ -1,5 +1,5 @@
-import { Serie } from '@api/models/serie';
-import { MarkdownFile } from '@api/models/markdownFile';
+import { Serie } from '@api/interfaces/serie';
+import { MarkdownFile } from '@api/interfaces/markdownFile';
 import { getMarkdownFile, getMarkdownDirectory } from '@api/databases/markdownDatabase';
 import { checkISODate } from '@api/helpers/dateHelper';
 import { join } from 'path';
@@ -30,13 +30,13 @@ export function getSerieFromMarkdownFile(
   );
   checkISODate(frontmatter.lastUpdate);
   const serieSlug: string = removeFilenameExtension(markdownFile.name);
-  return new Serie(
-    serieSlug,
-    markdownFile.markdown,
-    frontmatter.title,
-    frontmatter.excerpt,
-    frontmatter.lastUpdate
-  );
+  return {
+    slug: serieSlug,
+    markdown: markdownFile.markdown,
+    title: frontmatter.title,
+    excerpt: frontmatter.excerpt,
+    lastUpdate: frontmatter.lastUpdate,
+  }
 }
 
 /**

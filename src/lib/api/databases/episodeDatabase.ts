@@ -1,5 +1,5 @@
-import { Episode } from '@api/models/episode';
-import { MarkdownFile } from '@api/models/markdownFile';
+import { Episode } from '@api/interfaces/episode';
+import { MarkdownFile } from '@api/interfaces/markdownFile';
 import { getMarkdownDirectory, getMarkdownFile } from '@api/databases/markdownDatabase';
 import { checkISODate } from '@api/helpers/dateHelper';
 import { SERIE_DIRECTORY } from '@api/databases/serieDatabase';
@@ -28,15 +28,15 @@ export function getEpisodeFromMarkdownFile(
   );
   checkISODate(frontmatter.date);
   const episodeSlug: string = removeFilenameExtension(markdownFile.name);
-  return new Episode(
-    episodeSlug,
-    markdownFile.markdown,
-    frontmatter.id,
-    frontmatter.title,
-    frontmatter.date,
-    frontmatter.excerpt,
-    frontmatter.readTime
-  );
+  return {
+    slug: episodeSlug,
+    markdown: markdownFile.markdown,
+    id: frontmatter.id,
+    title: frontmatter.title,
+    date: frontmatter.date,
+    excerpt: frontmatter.excerpt,
+    readTime: frontmatter.readTime,
+  };
 }
 
 /**

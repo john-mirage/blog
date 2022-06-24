@@ -2,7 +2,6 @@ import {
   getEpisodeFromMarkdownFile,
   getEpisodeDirectory,
 } from '@api/databases/episodeDatabase';
-import { Episode } from '@api/models/episode';
 import {
   getMarkdownDirectory,
   getMarkdownFile,
@@ -15,10 +14,6 @@ import {
   removeFilenameExtension,
 } from '@api/helpers/fileHelper';
 import { getEpisodeFrontmatter } from '@api/helpers/episodeHelper';
-
-jest.mock('@api/models/episode', () => {
-  return { Episode: jest.fn() };
-});
 
 jest.mock('@api/databases/markdownDatabase', () => {
   return { getMarkdownFile: jest.fn(), getMarkdownDirectory: jest.fn() };
@@ -40,24 +35,15 @@ jest.mock('@api/helpers/episodeHelper', () => {
   return { getEpisodeFrontmatter: jest.fn() };
 });
 
-const EpisodeMock = <jest.Mock<Episode>>Episode;
 const getMarkdownFileMock = <jest.MockedFunction<typeof getMarkdownFile>>(
   getMarkdownFile
 );
-const getMarkdownDirectoryMock = <
-  jest.MockedFunction<typeof getMarkdownDirectory>
->getMarkdownDirectory;
+const getMarkdownDirectoryMock = <jest.MockedFunction<typeof getMarkdownDirectory>>getMarkdownDirectory;
 const checkISODateMock = <jest.MockedFunction<typeof checkISODate>>checkISODate;
 const joinMock = <jest.MockedFunction<typeof join>>join;
-const removeFilenameExtensionMock = <
-  jest.MockedFunction<typeof removeFilenameExtension>
->removeFilenameExtension;
-const checkFileDirectoryMock = <jest.MockedFunction<typeof checkFileDirectory>>(
-  checkFileDirectory
-);
-const getEpisodeFrontmatterMock = <
-  jest.MockedFunction<typeof getEpisodeFrontmatter>
->getEpisodeFrontmatter;
+const removeFilenameExtensionMock = <jest.MockedFunction<typeof removeFilenameExtension>>removeFilenameExtension;
+const checkFileDirectoryMock = <jest.MockedFunction<typeof checkFileDirectory>>(checkFileDirectory);
+const getEpisodeFrontmatterMock = <jest.MockedFunction<typeof getEpisodeFrontmatter>>getEpisodeFrontmatter;
 
 const MARKDOWN_FILE = {
   name: 'name-of-the-markdown-file-1.md',
@@ -94,14 +80,12 @@ describe('episodeDatabase: getEpisode', () => {
     checkISODateMock.mockClear();
     getEpisodeFrontmatterMock.mockClear();
     removeFilenameExtensionMock.mockClear();
-    EpisodeMock.mockClear();
   });
 
   it('should return a new episode', () => {
     getMarkdownFileMock.mockReturnValueOnce(MARKDOWN_FILE);
     getEpisodeFrontmatterMock.mockReturnValueOnce(MARKDOWN_FILE.frontmatter);
     removeFilenameExtensionMock.mockReturnValueOnce(EPISODE_SLUG);
-    EpisodeMock.mockReturnValueOnce(EPISODE);
     const episode = getEpisodeFromMarkdownFile(FILENAME, FILE_DIRECTORY);
     expect(episode).toEqual(EPISODE);
     expect(getMarkdownFileMock).toHaveBeenCalledTimes(1);
@@ -118,16 +102,6 @@ describe('episodeDatabase: getEpisode', () => {
     expect(removeFilenameExtensionMock).toHaveBeenCalledTimes(1);
     expect(removeFilenameExtensionMock).toHaveBeenCalledWith(
       MARKDOWN_FILE.name
-    );
-    expect(EpisodeMock).toHaveBeenCalledTimes(1);
-    expect(EpisodeMock).toHaveBeenCalledWith(
-      EPISODE_SLUG,
-      MARKDOWN_FILE.markdown,
-      MARKDOWN_FILE.frontmatter.id,
-      MARKDOWN_FILE.frontmatter.title,
-      MARKDOWN_FILE.frontmatter.date,
-      MARKDOWN_FILE.frontmatter.excerpt,
-      MARKDOWN_FILE.frontmatter.readTime
     );
   });
 });

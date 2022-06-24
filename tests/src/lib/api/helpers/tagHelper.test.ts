@@ -1,5 +1,5 @@
 import { sortTagsByTitle, getTagFrontmatter } from '@api/helpers/tagHelper';
-import { Tag } from '@api/models/tag';
+import { Tag } from '@api/interfaces/tag';
 
 const TAG1 = { title: 'title of the tag 1' };
 const TAG2 = { title: 'title of the tag 2' };

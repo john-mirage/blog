@@ -2,7 +2,7 @@ import {
   sortSeriesByLastUpdate,
   getSerieFrontmatter,
 } from '@api/helpers/serieHelper';
-import { Serie } from '@api/models/serie';
+import { Serie } from '@api/interfaces/serie';
 
 const SERIE1 = { lastUpdate: '2021-09-15T15:30:00' };
 const SERIE2 = { lastUpdate: '2021-09-13T15:30:00' };
