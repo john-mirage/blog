@@ -1,12 +1,18 @@
-import { Tag } from '@api/interfaces/tag';
-import { MarkdownFile } from '@api/interfaces/markdownFile';
-import { getMarkdownFile, getMarkdownDirectory } from '@api/databases/markdownDatabase';
-import { join } from 'path';
-import { checkFileDirectory, removeFilenameExtension } from '@api/helpers/fileHelper';
-import { getTagFrontmatter, TagFrontmatter } from '@api/helpers/tagHelper';
+import { Tag } from "@api/interfaces/tag";
+import { MarkdownFile } from "@api/interfaces/markdownFile";
+import {
+  getMarkdownFile,
+  getMarkdownDirectory,
+} from "@api/databases/markdownDatabase";
+import { join } from "path";
+import {
+  checkFileDirectory,
+  removeFilenameExtension,
+} from "@api/helpers/fileHelper";
+import { getTagFrontmatter, TagFrontmatter } from "@api/helpers/tagHelper";
 
 /** @constant The tag directory */
-export const TAG_DIRECTORY = 'tags';
+export const TAG_DIRECTORY = "tags";
 
 /**
  * Get a tag from a Markdown file.
@@ -30,7 +36,7 @@ export function getTagFromMarkdownFile(
     markdown: markdownFile.markdown,
     title: frontmatter.title,
     excerpt: frontmatter.excerpt,
-  }
+  };
 }
 
 /**

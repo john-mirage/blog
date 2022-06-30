@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from "fs";
 
 /**
  * Check if the file directory path exists on the system.
@@ -46,5 +46,5 @@ export function removeFilenameExtension(filename: string): string {
   if (filename.search(regex) === -1) {
     throw new Error(`${filename} does not include a file extension`);
   }
-  return filename.replace(regex, '');
+  return filename.replace(regex, "");
 }

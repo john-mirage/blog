@@ -4,64 +4,64 @@ import {
   getPostsBySlugs,
   getPostsByTags,
   getPostSlugs,
-} from '@api/controllers/postController';
+} from "@api/controllers/postController";
 import {
   getPostFromMarkdownFile,
   getPostDirectory,
   POST_DIRECTORY,
-} from '@api/databases/postDatabase';
-import { getMarkdownFilenames } from '@api/databases/markdownDatabase';
+} from "@api/databases/postDatabase";
+import { getMarkdownFilenames } from "@api/databases/markdownDatabase";
 import {
   getFilenameWithExtension,
   removeFilenameExtension,
-} from '@api/helpers/fileHelper';
-import { sortPostsByDate, filterPostsByTags } from '@api/helpers/postHelper';
+} from "@api/helpers/fileHelper";
+import { sortPostsByDate, filterPostsByTags } from "@api/helpers/postHelper";
 
-jest.mock('@api/databases/postDatabase', () => {
+jest.mock("@api/databases/postDatabase", () => {
   return { getPostFromMarkdownFile: jest.fn(), getPostDirectory: jest.fn() };
 });
 
-jest.mock('@api/databases/markdownDatabase', () => {
+jest.mock("@api/databases/markdownDatabase", () => {
   return { getMarkdownFilenames: jest.fn() };
 });
 
-jest.mock('@api/helpers/fileHelper', () => {
+jest.mock("@api/helpers/fileHelper", () => {
   return {
     getFilenameWithExtension: jest.fn(),
     removeFilenameExtension: jest.fn(),
   };
 });
 
-jest.mock('@api/helpers/postHelper', () => {
+jest.mock("@api/helpers/postHelper", () => {
   return { sortPostsByDate: jest.fn(), filterPostsByTags: jest.fn() };
 });
 
 const POST1 = {
-  slug: 'slug-of-the-post-1',
-  markdown: '# markdown content of the post 1',
-  title: 'title of the post 1',
-  date: '2021-09-15',
-  excerpt: 'short description of the post 1',
-  tags: ['tag1', 'tag2'],
-  readTime: '5 minutes',
+  slug: "slug-of-the-post-1",
+  markdown: "# markdown content of the post 1",
+  title: "title of the post 1",
+  date: "2021-09-15",
+  excerpt: "short description of the post 1",
+  tags: ["tag1", "tag2"],
+  readTime: "5 minutes",
 };
 const POST2 = {
-  slug: 'slug-of-the-post-2',
-  markdown: '# markdown content of the post 2',
-  title: 'title of the post 2',
-  date: '2021-09-14',
-  excerpt: 'short description of the post 2',
-  tags: ['tag3', 'tag4'],
-  readTime: '20 minutes',
+  slug: "slug-of-the-post-2",
+  markdown: "# markdown content of the post 2",
+  title: "title of the post 2",
+  date: "2021-09-14",
+  excerpt: "short description of the post 2",
+  tags: ["tag3", "tag4"],
+  readTime: "20 minutes",
 };
 const POST3 = {
-  slug: 'slug-of-the-post-3',
-  markdown: '# markdown content of the post 3',
-  title: 'title of the post 3',
-  date: '2021-09-16',
-  excerpt: 'short description of the post 3',
-  tags: ['tag1', 'tag3'],
-  readTime: '10 minutes',
+  slug: "slug-of-the-post-3",
+  markdown: "# markdown content of the post 3",
+  title: "title of the post 3",
+  date: "2021-09-16",
+  excerpt: "short description of the post 3",
+  tags: ["tag1", "tag3"],
+  readTime: "10 minutes",
 };
 const POSTS = [POST1, POST2, POST3];
 const POST_FILENAME1 = `${POST1.slug}.md`;
@@ -69,7 +69,7 @@ const POST_FILENAME2 = `${POST2.slug}.md`;
 const POST_FILENAME3 = `${POST3.slug}.md`;
 const POST_FILENAMES = [POST_FILENAME1, POST_FILENAME2, POST_FILENAME3];
 const POST_DIRECTORY_PATH = `/home/work/project/${POST_DIRECTORY}`;
-const POST_ORDER = 'descending';
+const POST_ORDER = "descending";
 
 const getPostDirectoryMock = <jest.MockedFunction<typeof getPostDirectory>>(
   getPostDirectory
@@ -93,7 +93,7 @@ const removeFilenameExtensionMock = <
   jest.MockedFunction<typeof removeFilenameExtension>
 >removeFilenameExtension;
 
-describe('postController: getPost', () => {
+describe("postController: getPost", () => {
   afterEach(() => {
     getPostDirectoryMock.mockClear();
     getMarkdownFilenamesMock.mockClear();
@@ -101,7 +101,7 @@ describe('postController: getPost', () => {
     getPostFromMarkdownFileMock.mockClear();
   });
 
-  it('should return a post', () => {
+  it("should return a post", () => {
     getPostDirectoryMock.mockReturnValue(POST_DIRECTORY_PATH);
     getMarkdownFilenamesMock.mockReturnValue(POST_FILENAMES);
     getFilenameWithExtensionMock.mockReturnValue(POST_FILENAME1);
@@ -124,7 +124,7 @@ describe('postController: getPost', () => {
   });
 });
 
-describe('PostController: getAllPosts', () => {
+describe("PostController: getAllPosts", () => {
   const ORDERED_POSTS = [POST3, POST1, POST2];
 
   afterEach(() => {
@@ -134,7 +134,7 @@ describe('PostController: getAllPosts', () => {
     sortPostsByDateMock.mockClear();
   });
 
-  it('should return all the posts', () => {
+  it("should return all the posts", () => {
     getPostDirectoryMock.mockReturnValue(POST_DIRECTORY_PATH);
     getMarkdownFilenamesMock.mockReturnValue(POST_FILENAMES);
     getPostFromMarkdownFileMock.mockReturnValueOnce(POST1);
@@ -167,7 +167,7 @@ describe('PostController: getAllPosts', () => {
   });
 });
 
-describe('PostController: getPostsBySlugs', () => {
+describe("PostController: getPostsBySlugs", () => {
   const POST_SLUGS = [POST1.slug, POST2.slug];
   const ORDERED_POSTS = [POST1, POST2];
 
@@ -179,7 +179,7 @@ describe('PostController: getPostsBySlugs', () => {
     sortPostsByDateMock.mockClear();
   });
 
-  it('should return the posts corresponding to one or more slugs', () => {
+  it("should return the posts corresponding to one or more slugs", () => {
     getPostDirectoryMock.mockReturnValue(POST_DIRECTORY_PATH);
     getMarkdownFilenamesMock.mockReturnValue(POST_FILENAMES);
     getFilenameWithExtensionMock.mockReturnValueOnce(POST_FILENAME1);
@@ -222,8 +222,8 @@ describe('PostController: getPostsBySlugs', () => {
   });
 });
 
-describe('PostController: getPostsByTags', () => {
-  const POST_TAGS = ['tag1'];
+describe("PostController: getPostsByTags", () => {
+  const POST_TAGS = ["tag1"];
 
   afterEach(() => {
     getPostDirectoryMock.mockClear();
@@ -233,7 +233,7 @@ describe('PostController: getPostsByTags', () => {
     sortPostsByDateMock.mockClear();
   });
 
-  it('should return the posts corresponding to one or more tags', () => {
+  it("should return the posts corresponding to one or more tags", () => {
     getPostDirectoryMock.mockReturnValue(POST_DIRECTORY_PATH);
     getMarkdownFilenamesMock.mockReturnValue(POST_FILENAMES);
     getPostFromMarkdownFileMock.mockReturnValueOnce(POST1);
@@ -272,8 +272,8 @@ describe('PostController: getPostsByTags', () => {
   });
 });
 
-describe('postController: getPostSlugs', () => {
-  it('should return all the post slugs', () => {
+describe("postController: getPostSlugs", () => {
+  it("should return all the post slugs", () => {
     getPostDirectoryMock.mockReturnValue(POST_DIRECTORY_PATH);
     getMarkdownFilenamesMock.mockReturnValue(POST_FILENAMES);
     removeFilenameExtensionMock.mockReturnValueOnce(POST1.slug);

@@ -1,9 +1,9 @@
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
-import { getPost, getPostSlugs } from '@api/controllers/postController';
-import { getHtmlFromMarkdown } from '@utils/newMarkdownFormatter';
-import { getLocaleDate } from '@utils/dateFormatter';
-import { Post } from '@api/interfaces/post';
-import Head from 'next/head';
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
+import { getPost, getPostSlugs } from "@api/controllers/postController";
+import { getHtmlFromMarkdown } from "@utils/newMarkdownFormatter";
+import { getLocaleDate } from "@utils/dateFormatter";
+import { Post } from "@api/interfaces/post";
+import Head from "next/head";
 
 interface PostDTO {
   html: string;
@@ -21,7 +21,7 @@ function PostPage({ post }: Props) {
       <Head>
         <title>{post.title}</title>
       </Head>
-      <div  dangerouslySetInnerHTML={{ __html: post.html || '' }} />
+      <div dangerouslySetInnerHTML={{ __html: post.html || "" }} />
     </>
   );
 }
@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps = async ({
 }: GetStaticPropsContext) => {
   const postSlug = String(params?.slug);
   const post: Post = getPost(postSlug);
-  const postDate: string = getLocaleDate('fr-FR', post.date);
+  const postDate: string = getLocaleDate("fr-FR", post.date);
   const postHtml: string = getHtmlFromMarkdown(post.markdown);
   const postDTO: PostDTO = {
     title: post.title,

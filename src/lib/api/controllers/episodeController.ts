@@ -1,11 +1,14 @@
-import { getEpisodeFromMarkdownFile, getEpisodeDirectory } from '@api/databases/episodeDatabase';
-import { Episode } from '@api/interfaces/episode';
-import { getFilenameWithExtension } from '@api/helpers/fileHelper';
-import { sortEpisodesById } from '@api/helpers/episodeHelper';
-import { getMarkdownFilenames } from '@api/databases/markdownDatabase';
+import {
+  getEpisodeFromMarkdownFile,
+  getEpisodeDirectory,
+} from "@api/databases/episodeDatabase";
+import { Episode } from "@api/interfaces/episode";
+import { getFilenameWithExtension } from "@api/helpers/fileHelper";
+import { sortEpisodesById } from "@api/helpers/episodeHelper";
+import { getMarkdownFilenames } from "@api/databases/markdownDatabase";
 
 /** @constant {string} The default episode order */
-const DEFAULT_EPISODE_ORDER = 'descending';
+const DEFAULT_EPISODE_ORDER = "descending";
 
 /**
  * Get an episode.

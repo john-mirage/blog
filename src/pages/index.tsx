@@ -1,9 +1,9 @@
-import Head from 'next/head';
-import { GetStaticProps } from 'next';
-import { getAllPosts } from '@api/controllers/postController';
-import { getLocaleDate } from '@utils/dateFormatter';
-import { Post } from '@api/interfaces/post';
-import Link from 'next/link';
+import Head from "next/head";
+import { GetStaticProps } from "next";
+import { getAllPosts } from "@api/controllers/postController";
+import { getLocaleDate } from "@utils/dateFormatter";
+import { Post } from "@api/interfaces/post";
+import Link from "next/link";
 
 interface PostDTO {
   slug: string;
@@ -39,7 +39,7 @@ function IndexPage({ posts }: Props) {
 export const getStaticProps: GetStaticProps = async () => {
   const posts: Post[] = getAllPosts();
   const postDTOs: PostDTO[] = posts.map((post: Post) => {
-    const postDate: string = getLocaleDate('fr-Fr', post.date);
+    const postDate: string = getLocaleDate("fr-Fr", post.date);
     const postDTO: PostDTO = {
       slug: post.slug,
       title: post.title,

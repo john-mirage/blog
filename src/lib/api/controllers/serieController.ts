@@ -1,11 +1,14 @@
-import { getSerieFromMarkdownFile, getSerieDirectory } from '@api/databases/serieDatabase';
-import { Serie } from '@api/interfaces/serie';
-import { getFilenameWithExtension } from '@api/helpers/fileHelper';
-import { sortSeriesByLastUpdate } from '@api/helpers/serieHelper';
-import { getMarkdownFilenames } from '@api/databases/markdownDatabase';
+import {
+  getSerieFromMarkdownFile,
+  getSerieDirectory,
+} from "@api/databases/serieDatabase";
+import { Serie } from "@api/interfaces/serie";
+import { getFilenameWithExtension } from "@api/helpers/fileHelper";
+import { sortSeriesByLastUpdate } from "@api/helpers/serieHelper";
+import { getMarkdownFilenames } from "@api/databases/markdownDatabase";
 
 /** @constant {string} The default serie order */
-const DEFAULT_SERIE_ORDER = 'descending';
+const DEFAULT_SERIE_ORDER = "descending";
 
 /**
  * Get a serie.

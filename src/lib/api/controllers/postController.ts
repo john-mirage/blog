@@ -1,11 +1,17 @@
-import { getPostFromMarkdownFile, getPostDirectory } from '@api/databases/postDatabase';
-import { Post } from '@api/interfaces/post';
-import { getFilenameWithExtension, removeFilenameExtension } from '@api/helpers/fileHelper';
-import { sortPostsByDate, filterPostsByTags } from '@api/helpers/postHelper';
-import { getMarkdownFilenames } from '@api/databases/markdownDatabase';
+import {
+  getPostFromMarkdownFile,
+  getPostDirectory,
+} from "@api/databases/postDatabase";
+import { Post } from "@api/interfaces/post";
+import {
+  getFilenameWithExtension,
+  removeFilenameExtension,
+} from "@api/helpers/fileHelper";
+import { sortPostsByDate, filterPostsByTags } from "@api/helpers/postHelper";
+import { getMarkdownFilenames } from "@api/databases/markdownDatabase";
 
 /** @constant The default post order */
-const DEFAULT_POST_ORDER = 'descending';
+const DEFAULT_POST_ORDER = "descending";
 
 /**
  * Get a post.

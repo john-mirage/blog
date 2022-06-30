@@ -1,9 +1,9 @@
 /** @constant {Intl.DateTimeFormatOptions} The date format option */
 export const DATE_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 };
 
 /**

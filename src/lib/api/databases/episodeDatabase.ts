@@ -1,11 +1,20 @@
-import { Episode } from '@api/interfaces/episode';
-import { MarkdownFile } from '@api/interfaces/markdownFile';
-import { getMarkdownDirectory, getMarkdownFile } from '@api/databases/markdownDatabase';
-import { checkISODate } from '@api/helpers/dateHelper';
-import { SERIE_DIRECTORY } from '@api/databases/serieDatabase';
-import { join } from 'path';
-import { checkFileDirectory, removeFilenameExtension } from '@api/helpers/fileHelper';
-import { EpisodeFrontmatter, getEpisodeFrontmatter } from '@api/helpers/episodeHelper';
+import { Episode } from "@api/interfaces/episode";
+import { MarkdownFile } from "@api/interfaces/markdownFile";
+import {
+  getMarkdownDirectory,
+  getMarkdownFile,
+} from "@api/databases/markdownDatabase";
+import { checkISODate } from "@api/helpers/dateHelper";
+import { SERIE_DIRECTORY } from "@api/databases/serieDatabase";
+import { join } from "path";
+import {
+  checkFileDirectory,
+  removeFilenameExtension,
+} from "@api/helpers/fileHelper";
+import {
+  EpisodeFrontmatter,
+  getEpisodeFrontmatter,
+} from "@api/helpers/episodeHelper";
 
 /**
  * Get an episode from a Markdown file.

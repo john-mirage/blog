@@ -1,6 +1,6 @@
-import fs from 'fs';
-import { join } from 'path';
-import { RawFile } from '@api/interfaces/rawFile';
+import fs from "fs";
+import { join } from "path";
+import { RawFile } from "@api/interfaces/rawFile";
 
 /**
  * Get a file.
@@ -11,11 +11,11 @@ import { RawFile } from '@api/interfaces/rawFile';
  */
 export function getFile(filename: string, fileDirectory: string): RawFile {
   const path: string = join(fileDirectory, filename);
-  const content: string = fs.readFileSync(path, 'utf8');
+  const content: string = fs.readFileSync(path, "utf8");
   return {
     name: filename,
     content: content,
-  }
+  };
 }
 
 /**

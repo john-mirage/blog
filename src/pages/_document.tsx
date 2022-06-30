@@ -11,13 +11,13 @@ export default class MyDocument extends Document {
         originalRenderPage({
           enhanceApp: (App) => (props) =>
             sheet.collectStyles(<App {...props} />),
-        })
+        });
 
-      const initialProps = await Document.getInitialProps(ctx)
+      const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
         styles: [initialProps.styles, sheet.getStyleElement()],
-      }
+      };
     } finally {
       sheet.seal();
     }

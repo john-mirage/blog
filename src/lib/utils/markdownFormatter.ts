@@ -1,8 +1,8 @@
-import { unified } from 'unified';
-import markdownParser from 'remark-parse';
-import markdownToHtml from 'remark-rehype';
-import htmlSanitizer, { defaultSchema } from 'rehype-sanitize';
-import htmlSerializer from 'rehype-stringify';
+import { unified } from "unified";
+import markdownParser from "remark-parse";
+import markdownToHtml from "remark-rehype";
+import htmlSanitizer, { defaultSchema } from "rehype-sanitize";
+import htmlSerializer from "rehype-stringify";
 
 /**
  * Get HTML content from Markdown content.

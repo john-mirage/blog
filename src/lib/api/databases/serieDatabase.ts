@@ -1,13 +1,22 @@
-import { Serie } from '@api/interfaces/serie';
-import { MarkdownFile } from '@api/interfaces/markdownFile';
-import { getMarkdownFile, getMarkdownDirectory } from '@api/databases/markdownDatabase';
-import { checkISODate } from '@api/helpers/dateHelper';
-import { join } from 'path';
-import { checkFileDirectory, removeFilenameExtension } from '@api/helpers/fileHelper';
-import { getSerieFrontmatter, SerieFrontmatter } from '@api/helpers/serieHelper';
+import { Serie } from "@api/interfaces/serie";
+import { MarkdownFile } from "@api/interfaces/markdownFile";
+import {
+  getMarkdownFile,
+  getMarkdownDirectory,
+} from "@api/databases/markdownDatabase";
+import { checkISODate } from "@api/helpers/dateHelper";
+import { join } from "path";
+import {
+  checkFileDirectory,
+  removeFilenameExtension,
+} from "@api/helpers/fileHelper";
+import {
+  getSerieFrontmatter,
+  SerieFrontmatter,
+} from "@api/helpers/serieHelper";
 
 /** @constant The serie directory */
-export const SERIE_DIRECTORY = 'series';
+export const SERIE_DIRECTORY = "series";
 
 /**
  * Get a serie from a Markdown file.
@@ -36,7 +45,7 @@ export function getSerieFromMarkdownFile(
     title: frontmatter.title,
     excerpt: frontmatter.excerpt,
     lastUpdate: frontmatter.lastUpdate,
-  }
+  };
 }
 
 /**

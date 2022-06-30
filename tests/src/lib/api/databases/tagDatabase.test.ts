@@ -2,57 +2,65 @@ import {
   getTagFromMarkdownFile,
   getTagDirectory,
   TAG_DIRECTORY,
-} from '@api/databases/tagDatabase';
+} from "@api/databases/tagDatabase";
 import {
   getMarkdownFile,
   getMarkdownDirectory,
-} from '@api/databases/markdownDatabase';
-import { join } from 'path';
+} from "@api/databases/markdownDatabase";
+import { join } from "path";
 import {
   checkFileDirectory,
   removeFilenameExtension,
-} from '@api/helpers/fileHelper';
-import { getTagFrontmatter } from '@api/helpers/tagHelper';
+} from "@api/helpers/fileHelper";
+import { getTagFrontmatter } from "@api/helpers/tagHelper";
 
-jest.mock('@api/databases/markdownDatabase', () => {
+jest.mock("@api/databases/markdownDatabase", () => {
   return { getMarkdownFile: jest.fn(), getMarkdownDirectory: jest.fn() };
 });
 
-jest.mock('@api/helpers/dateHelper', () => {
+jest.mock("@api/helpers/dateHelper", () => {
   return { checkISODate: jest.fn() };
 });
 
-jest.mock('path', () => {
+jest.mock("path", () => {
   return { join: jest.fn() };
 });
 
-jest.mock('@api/helpers/fileHelper', () => {
+jest.mock("@api/helpers/fileHelper", () => {
   return { removeFilenameExtension: jest.fn(), checkFileDirectory: jest.fn() };
 });
 
-jest.mock('@api/helpers/tagHelper', () => {
+jest.mock("@api/helpers/tagHelper", () => {
   return { getTagFrontmatter: jest.fn() };
 });
 
 const getMarkdownFileMock = <jest.MockedFunction<typeof getMarkdownFile>>(
   getMarkdownFile
 );
-const getMarkdownDirectoryMock = <jest.MockedFunction<typeof getMarkdownDirectory>>getMarkdownDirectory;
+const getMarkdownDirectoryMock = <
+  jest.MockedFunction<typeof getMarkdownDirectory>
+>getMarkdownDirectory;
 const joinMock = <jest.MockedFunction<typeof join>>join;
-const removeFilenameExtensionMock = <jest.MockedFunction<typeof removeFilenameExtension>>removeFilenameExtension;
-const checkFileDirectoryMock = <jest.MockedFunction<typeof checkFileDirectory>>(checkFileDirectory);
-const getTagFrontmatterMock = <jest.MockedFunction<typeof getTagFrontmatter>>(getTagFrontmatter);
+const removeFilenameExtensionMock = <
+  jest.MockedFunction<typeof removeFilenameExtension>
+>removeFilenameExtension;
+const checkFileDirectoryMock = <jest.MockedFunction<typeof checkFileDirectory>>(
+  checkFileDirectory
+);
+const getTagFrontmatterMock = <jest.MockedFunction<typeof getTagFrontmatter>>(
+  getTagFrontmatter
+);
 
 const MARKDOWN_FILE = {
-  name: 'name-of-the-markdown-file-1.md',
-  markdown: '# markdown content of the markdown file 1',
+  name: "name-of-the-markdown-file-1.md",
+  markdown: "# markdown content of the markdown file 1",
   frontmatter: {
-    title: 'title of the entity 1',
-    excerpt: 'short description of the entity 1',
+    title: "title of the entity 1",
+    excerpt: "short description of the entity 1",
   },
 };
 
-const TAG_SLUG = 'name-of-the-markdown-file-1';
+const TAG_SLUG = "name-of-the-markdown-file-1";
 
 const TAG = {
   slug: TAG_SLUG,
@@ -61,9 +69,9 @@ const TAG = {
   excerpt: MARKDOWN_FILE.frontmatter.excerpt,
 };
 
-describe('tagDatabase: getTag', () => {
-  const FILENAME = MARKDOWN_FILE.name + '.md';
-  const FILE_DIRECTORY = '/markdown/tags';
+describe("tagDatabase: getTag", () => {
+  const FILENAME = MARKDOWN_FILE.name + ".md";
+  const FILE_DIRECTORY = "/markdown/tags";
 
   afterEach(() => {
     getMarkdownFileMock.mockClear();
@@ -71,7 +79,7 @@ describe('tagDatabase: getTag', () => {
     removeFilenameExtensionMock.mockClear();
   });
 
-  it('should return a new tag', () => {
+  it("should return a new tag", () => {
     getMarkdownFileMock.mockReturnValueOnce(MARKDOWN_FILE);
     getTagFrontmatterMock.mockReturnValueOnce(MARKDOWN_FILE.frontmatter);
     removeFilenameExtensionMock.mockReturnValueOnce(TAG_SLUG);
@@ -91,15 +99,15 @@ describe('tagDatabase: getTag', () => {
   });
 });
 
-describe('tagDatabase: getTagDirectory', () => {
+describe("tagDatabase: getTagDirectory", () => {
   afterEach(() => {
     getMarkdownDirectoryMock.mockClear();
     joinMock.mockClear();
     checkFileDirectoryMock.mockClear();
   });
 
-  it('should return the tag directory', () => {
-    const MARKDOWN_DIRECTORY = '/markdown';
+  it("should return the tag directory", () => {
+    const MARKDOWN_DIRECTORY = "/markdown";
     const TAG_DIRECTORY_PATH = `${MARKDOWN_DIRECTORY}/${TAG_DIRECTORY}`;
     getMarkdownDirectoryMock.mockReturnValueOnce(MARKDOWN_DIRECTORY);
     joinMock.mockReturnValueOnce(TAG_DIRECTORY_PATH);

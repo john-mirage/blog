@@ -1,11 +1,14 @@
-import { getTagFromMarkdownFile, getTagDirectory } from '@api/databases/tagDatabase';
-import { Tag } from '@api/interfaces/tag';
-import { getFilenameWithExtension } from '@api/helpers/fileHelper';
-import { sortTagsByTitle } from '@api/helpers/tagHelper';
-import { getMarkdownFilenames } from '@api/databases/markdownDatabase';
+import {
+  getTagFromMarkdownFile,
+  getTagDirectory,
+} from "@api/databases/tagDatabase";
+import { Tag } from "@api/interfaces/tag";
+import { getFilenameWithExtension } from "@api/helpers/fileHelper";
+import { sortTagsByTitle } from "@api/helpers/tagHelper";
+import { getMarkdownFilenames } from "@api/databases/markdownDatabase";
 
 /** @constant {string} The default tag order */
-const DEFAULT_TAG_ORDER = 'descending';
+const DEFAULT_TAG_ORDER = "descending";
 
 /**
  * Get a tag.

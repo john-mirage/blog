@@ -1,5 +1,5 @@
-import { Serie } from '@api/interfaces/serie';
-import { Frontmatter } from '@api/interfaces/markdownFile';
+import { Serie } from "@api/interfaces/serie";
+import { Frontmatter } from "@api/interfaces/markdownFile";
 
 export interface SerieFrontmatter {
   excerpt: string;
@@ -20,14 +20,14 @@ export function sortSeriesByLastUpdate(
 ): Serie[] {
   return series.sort((serieA: Serie, serieB: Serie) => {
     switch (serieOrder) {
-      case 'descending': {
+      case "descending": {
         return serieA.lastUpdate > serieB.lastUpdate ? -1 : 1;
       }
-      case 'ascending': {
+      case "ascending": {
         return serieA.lastUpdate < serieB.lastUpdate ? -1 : 1;
       }
       default: {
-        throw new Error('The order is invalid');
+        throw new Error("The order is invalid");
       }
     }
   });

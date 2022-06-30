@@ -1,5 +1,5 @@
-import { Episode } from '@api/interfaces/episode';
-import { Frontmatter } from '@api/interfaces/markdownFile';
+import { Episode } from "@api/interfaces/episode";
+import { Frontmatter } from "@api/interfaces/markdownFile";
 
 export interface EpisodeFrontmatter {
   date: string;
@@ -22,14 +22,14 @@ export function sortEpisodesById(
 ): Episode[] {
   return episodes.sort((episodeA: Episode, episodeB: Episode) => {
     switch (episodeOrder) {
-      case 'descending': {
+      case "descending": {
         return episodeA.id > episodeB.id ? -1 : 1;
       }
-      case 'ascending': {
+      case "ascending": {
         return episodeA.id < episodeB.id ? -1 : 1;
       }
       default: {
-        throw new Error('The order is invalid');
+        throw new Error("The order is invalid");
       }
     }
   });

@@ -1,13 +1,19 @@
-import { Post } from '@api/interfaces/post';
-import { MarkdownFile } from '@api/interfaces/markdownFile';
-import { getMarkdownFile, getMarkdownDirectory } from '@api/databases/markdownDatabase';
-import { checkISODate } from '@api/helpers/dateHelper';
-import { join } from 'path';
-import { checkFileDirectory, removeFilenameExtension } from '@api/helpers/fileHelper';
-import { getPostFrontmatter, PostFrontmatter } from '@api/helpers/postHelper';
+import { Post } from "@api/interfaces/post";
+import { MarkdownFile } from "@api/interfaces/markdownFile";
+import {
+  getMarkdownFile,
+  getMarkdownDirectory,
+} from "@api/databases/markdownDatabase";
+import { checkISODate } from "@api/helpers/dateHelper";
+import { join } from "path";
+import {
+  checkFileDirectory,
+  removeFilenameExtension,
+} from "@api/helpers/fileHelper";
+import { getPostFrontmatter, PostFrontmatter } from "@api/helpers/postHelper";
 
 /** @constant The post directory */
-export const POST_DIRECTORY = 'posts';
+export const POST_DIRECTORY = "posts";
 
 /**
  * Get a post from a Markdown file.
@@ -37,8 +43,8 @@ export function getPostFromMarkdownFile(
     date: frontmatter.date,
     excerpt: frontmatter.excerpt,
     tags: frontmatter.tags,
-    readTime: frontmatter.readTime
-  }
+    readTime: frontmatter.readTime,
+  };
 }
 
 /**

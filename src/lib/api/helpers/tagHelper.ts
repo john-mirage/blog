@@ -1,5 +1,5 @@
-import { Tag } from '@api/interfaces/tag';
-import { Frontmatter } from '@api/interfaces/markdownFile';
+import { Tag } from "@api/interfaces/tag";
+import { Frontmatter } from "@api/interfaces/markdownFile";
 
 export interface TagFrontmatter {
   excerpt: string;
@@ -16,14 +16,14 @@ export interface TagFrontmatter {
 export function sortTagsByTitle(tags: Tag[], tagOrder: string): Tag[] {
   return tags.sort((tagA: Tag, tagB: Tag) => {
     switch (tagOrder) {
-      case 'descending': {
+      case "descending": {
         return tagA.title > tagB.title ? -1 : 1;
       }
-      case 'ascending': {
+      case "ascending": {
         return tagA.title < tagB.title ? -1 : 1;
       }
       default: {
-        throw new Error('The order is invalid');
+        throw new Error("The order is invalid");
       }
     }
   });

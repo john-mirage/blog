@@ -1,14 +1,14 @@
-import matter, { GrayMatterFile } from 'gray-matter';
-import { MarkdownFile } from '@api/interfaces/markdownFile';
-import { getFile, getFilenames } from '@api/databases/fileDatabase';
-import { RawFile } from '@api/interfaces/rawFile';
-import { join } from 'path';
+import matter, { GrayMatterFile } from "gray-matter";
+import { MarkdownFile } from "@api/interfaces/markdownFile";
+import { getFile, getFilenames } from "@api/databases/fileDatabase";
+import { RawFile } from "@api/interfaces/rawFile";
+import { join } from "path";
 
 /** @constant The markdown directory */
-export const MARKDOWN_DIRECTORY = 'markdown';
+export const MARKDOWN_DIRECTORY = "markdown";
 
 /** @constant The Markdown file extensions */
-export const MARKDOWN_EXTENSIONS: string[] = ['md', 'markdown'];
+export const MARKDOWN_EXTENSIONS: string[] = ["md", "markdown"];
 
 /**
  * Get a Markdown file.
@@ -27,7 +27,7 @@ export function getMarkdownFile(
     name: filename,
     frontmatter: data,
     markdown: content,
-  }
+  };
 }
 
 /**
