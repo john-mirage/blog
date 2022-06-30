@@ -4,6 +4,7 @@ import { getHtmlFromMarkdown } from "@utils/newMarkdownFormatter";
 import { getLocaleDate } from "@utils/dateFormatter";
 import { Post } from "@api/interfaces/post";
 import Head from "next/head";
+import styled from "styled-components";
 
 interface PostDTO {
   html: string;
@@ -15,13 +16,17 @@ interface Props {
   post: PostDTO;
 }
 
+const Post = styled.div`
+  font-family: ${({ theme }) => theme.fonts.text};
+`;
+
 function PostPage({ post }: Props) {
   return (
     <>
       <Head>
         <title>{post.title}</title>
       </Head>
-      <div dangerouslySetInnerHTML={{ __html: post.html || "" }} />
+      <Post dangerouslySetInnerHTML={{ __html: post.html || "" }} />
     </>
   );
 }

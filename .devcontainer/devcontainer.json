@@ -21,7 +21,11 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "styled-components.vscode-styled-components"
-      ]
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+      }
     }
   },
 

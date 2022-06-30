@@ -8,6 +8,12 @@ const theme: DefaultTheme = {
     primary: "#111",
     secondary: "#0070f3",
   },
+  fonts: {
+    display:
+      "'RedHatDisplay', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
+    text: "'RedHatText', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
+    mono: "'RedHatMono', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
+  },
 };
 
 export default function App({ Component, pageProps }: AppProps) {
